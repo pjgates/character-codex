@@ -1,11 +1,9 @@
 import React, { FunctionComponent, Component } from "react";
 import styled from "styled-components";
 
-const _ = require("lodash");
-
 export interface ThemeProps {
     name: string;
-    type: ThemeType;
+    type: MythosTheme | LogosTheme;
     powers: CharacterTag[];
     weaknesses: CharacterTag[];
     improvements?: string[];
@@ -13,11 +11,11 @@ export interface ThemeProps {
 interface ThemeState {
     cardSide: "front" | "back";
 }
-interface CharacterTag {
+export interface CharacterTag {
     [key: string]: string
 }
 
-export type ThemeType =
+export type MythosTheme =
     "Adaptation" |
     "Bastion" |
     "Conjuration" |
@@ -27,7 +25,8 @@ export type ThemeType =
     "Familiar" |
     "Mobility" |
     "Relic" |
-    "Subversion" |
+    "Subversion";
+export type LogosTheme = 
     "Defining Event" |
     "Defining Relationship" |
     "Mission" |
@@ -36,6 +35,7 @@ export type ThemeType =
     "Routine" |
     "Training" |
     "Turf";
+
 
 export class CharacterTheme extends Component<ThemeProps, ThemeState> {
     state: ThemeState = {
@@ -88,21 +88,21 @@ export class CharacterTheme extends Component<ThemeProps, ThemeState> {
     }
     
 };
-const ThemeBox = styled.div`
+// const ThemeBox = styled.div`
 
-`
-const ThemeHeader = styled.div`
-    grid-row-start: 1;
-`
-const ThemePowers = styled.div`
-    grid-row-start: 2;
-`
-const ThemeWeakness = styled.div`
-    grid-row-start: 3;
-`
-const ThemeImprove = styled.div`
-    grid-row-start: 4;
-`
+// `
+// const ThemeHeader = styled.div`
+//     grid-row-start: 1;
+// `
+// const ThemePowers = styled.div`
+//     grid-row-start: 2;
+// `
+// const ThemeWeakness = styled.div`
+//     grid-row-start: 3;
+// `
+// const ThemeImprove = styled.div`
+//     grid-row-start: 4;
+// `
 
 
 interface TagProps {
