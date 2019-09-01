@@ -3,22 +3,27 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { SheetController } from "./components/mist/SheetController";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 ReactDOM.render(
-    <Router>
+    <Router basename={"/"}>
         <div>
-            <Link to="/character-codex"> Home </Link>
-            <Link to="/character-codex/peter"> Peter </Link>
-            <Route path="/character-codex/:name" component={CharacterRoute}></Route>
+            <Route path={`/character-codex/`}
+                render={ (props) => <CharacterRoute {...props} />}
+            />
         </div>
     </Router>,
     document.getElementById("root"),
 );
 
-
 function CharacterRoute(props: any) {
-    return <SheetController playerName={props.match.params.name} />;
+    const queryString = require('query-string');
+    var parsed = queryString.parse(props.location.search);
+    if (parsed.name) {
+        return <SheetController playerName={parsed.name} />;
+    } else {
+        return null;
+    }
 }
 
 // If you want your app to work offline and load faster, you can change
