@@ -1,56 +1,74 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Sheet } from "./Sheet";
+import { Sheet, CharacterSheet } from "./Sheet";
 import { fetchData, CharacterData } from "./DataController";
+import { Card, CardContent } from "@material-ui/core";
 
 const _ = require("lodash");
 
 interface Props {
-    playerName: string;
+    playerName?: string;
 }
 
 interface State {
-    characters?: CharacterData[]
+    characters?: CharacterData[];
 }
 
 export class SheetController extends Component<Props, State> {
-
-    state: State = {}
+    state: State = {};
 
     componentDidMount() {
-        fetchData((data) => {
+        fetchData(data => {
             return this.setState({
                 characters: data,
-            })
-        })
+            });
+        });
     }
 
     render() {
-        let character: CharacterData | undefined;
-        if (this.state.characters) {
-            const index = _.findIndex(this.state.characters, (character: CharacterData) => {
-                return character.player.toLowerCase() === this.props.playerName;
-            });
+        let content: JSX.Element = <div></div>;
+        if (!this.props.playerName) {
+            content = (
+                <ErrorBlock>
+                    <CardContent>Please provide a player name</CardContent>
+                </ErrorBlock>
+            );
+        } else if (this.state.characters) {
+            let character: CharacterData | undefined;
+            const index = _.findIndex(
+                this.state.characters,
+                (character: CharacterData) => {
+                    return (
+                        character.player.toLowerCase() === this.props.playerName
+                    );
+                },
+            );
 
             character = this.state.characters[index];
+            if (character) {
+                content = <Sheet character={character} />;
+            } else {
+                const name = this.props.playerName;
+                const displayName =
+                    name.charAt(0).toUpperCase() + name.slice(1);
+                content = (
+                    <ErrorBlock>
+                        <CardContent>
+                            Player '{displayName}' not found.
+                        </CardContent>{" "}
+                    </ErrorBlock>
+                );
+            }
         }
 
-        return (
-            <SheetContainer>
-                {character &&
-                    <Sheet character={character} />
-                }
-            </SheetContainer>
-        );
+        return <CharacterSheet>{content}</CharacterSheet>;
     }
+}
 
-
-};
-
-const SheetContainer = styled.div`
-    height: 100vh;
-    display: grid
-    grid-template-columns: 15px repeat(4, 1fr) 15px;
-    grid-template-rows: 20px 1fr 20px;
-    grid-column-gap: 5px;
+const ErrorBlock = styled(Card)`
+    grid-row-start: 2;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    align-self: center;
+    justify-self: center;
 `;

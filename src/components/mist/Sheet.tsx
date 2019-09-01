@@ -12,26 +12,24 @@ export const Sheet: FunctionComponent<Props> = (props: Props) => {
         <>
             {Object.values(props.character.themes).map((theme, index) => {
                 return (
-                    <CharacterThemeContainer column={index + 1} key={index}>
-                        <CharacterTheme
-                            name={theme.name}
-                            type={theme.type}
-                            powers={theme.powers}
-                            weaknesses={theme.weaknesses}
-                        />
-                    </CharacterThemeContainer>
+                    <CharacterTheme
+                        column={index + 1}
+                        key={index}
+                        name={theme.name}
+                        type={theme.type}
+                        powers={theme.powers}
+                        weaknesses={theme.weaknesses}
+                    />
                 );
             })}
         </>
     );
 };
 
-interface CharacterThemeContainerProps {
-    column: number;
-}
-const CharacterThemeContainer = styled.div`
-    grid-column-start: ${(props: CharacterThemeContainerProps) => props.column + 1};
-    grid-row-start: 2;
-    display: grid;
-    grid-template-rows: 50px 2fr 1fr 100px;
+export const CharacterSheet = styled.div`
+    height: calc(100vh - 64px);
+    display: grid
+    grid-template-columns: 15px repeat(4, 1fr) 15px;
+    grid-template-rows: 100px 1fr 20px;
+    grid-column-gap: 10px;
 `;
