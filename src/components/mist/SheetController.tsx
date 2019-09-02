@@ -39,7 +39,7 @@ export class SheetController extends Component<Props, State> {
                 this.state.characters,
                 (character: CharacterData) => {
                     return (
-                        character.player.toLowerCase() === this.props.playerName
+                        character.player.toLowerCase() === (this.props.playerName && this.props.playerName.toLowerCase())
                     );
                 },
             );
@@ -55,7 +55,7 @@ export class SheetController extends Component<Props, State> {
                     <ErrorBlock>
                         <CardContent>
                             Player '{displayName}' not found.
-                        </CardContent>{" "}
+                        </CardContent>
                     </ErrorBlock>
                 );
             }
@@ -66,7 +66,7 @@ export class SheetController extends Component<Props, State> {
 }
 
 const ErrorBlock = styled(Card)`
-    grid-row-start: 2;
+    grid-row-start: 1;
     grid-column-start: 3;
     grid-column-end: 5;
     align-self: center;

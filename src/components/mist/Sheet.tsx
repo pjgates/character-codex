@@ -10,7 +10,7 @@ interface Props {
 export const Sheet: FunctionComponent<Props> = (props: Props) => {
     return (
         <>
-            {Object.values(props.character.themes).map((theme, index) => {
+            {props.character.themes && Object.values(props.character.themes).map((theme, index) => {
                 return (
                     <CharacterTheme
                         column={index + 1}

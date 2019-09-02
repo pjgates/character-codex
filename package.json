@@ -26,11 +26,12 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "styled-components": "^4.3.2",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "unflatten": "^1.0.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "predeploy": "yarn run build",
+    "start": "cp 'src/creds_dev.json' 'src/creds.json' && react-scripts start",
+    "predeploy": "cp 'src/creds_prod.json' 'src/creds.json' && yarn run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -16,10 +16,10 @@ import { MoreVert as MoreVertIcon } from "@material-ui/icons";
 import theme from "../../theme";
 
 export interface ThemeProps {
-    name: string;
-    type: MythosTheme | LogosTheme;
-    powers: CharacterTag[];
-    weaknesses: CharacterTag[];
+    name?: string;
+    type?: MythosTheme | LogosTheme;
+    powers?: any;
+    weaknesses?: any;
     improvements?: string[];
     column: number;
 }
@@ -67,7 +67,7 @@ export class CharacterTheme extends Component<ThemeProps, ThemeState> {
                     style={{ padding: theme.spacing(5, 2) }}
                     avatar={
                         <Avatar aria-label="theme">
-                            {this.props.type.substring(0, 1)}
+                            {this.props.type && this.props.type.substring(0, 1)}
                         </Avatar>
                     }
                     action={
@@ -85,12 +85,26 @@ export class CharacterTheme extends Component<ThemeProps, ThemeState> {
                         color="textPrimary"
                         component="p"
                     >
-                        {this.props.powers.map((tag: CharacterTag) => {
-                            const key = Object.keys(tag)[0];
-                            return (
-                                <Tag key={key} letter={key} tag={tag[key]} />
-                            );
-                        })}
+                        {this.props.powers &&
+                            Object.keys(this.props.powers).map(
+                                (key: string) => {
+                                    if (
+                                        this.props.weaknesses &&
+                                        this.props.powers[key].length > 0
+                                    ) {
+                                        return (
+                                            <Tag
+                                                key={key}
+                                                letter={key}
+                                                tag={
+                                                    this.props.powers &&
+                                                    this.props.powers[key]
+                                                }
+                                            />
+                                        );
+                                    }
+                                },
+                            )}
                     </Typography>
                     <Divider
                         variant={"middle"}
@@ -101,12 +115,26 @@ export class CharacterTheme extends Component<ThemeProps, ThemeState> {
                         color="textSecondary"
                         component="p"
                     >
-                        {this.props.weaknesses.map((tag: CharacterTag) => {
-                            const key = Object.keys(tag)[0];
-                            return (
-                                <Tag key={key} letter={key} tag={tag[key]} />
-                            );
-                        })}
+                        {this.props.weaknesses &&
+                            Object.keys(this.props.weaknesses).map(
+                                (key: string) => {
+                                    if (
+                                        this.props.weaknesses &&
+                                        this.props.weaknesses[key].length > 0
+                                    ) {
+                                        return (
+                                            <Tag
+                                                key={key}
+                                                letter={key}
+                                                tag={
+                                                    this.props.weaknesses &&
+                                                    this.props.weaknesses[key]
+                                                }
+                                            />
+                                        );
+                                    }
+                                },
+                            )}
                     </Typography>
                     <Typography>{this.props.improvements}</Typography>
                 </CardContent>
