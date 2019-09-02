@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/character-codex/static/css/main.19393e92.chunk.css",
-    "main.js": "/character-codex/static/js/main.ea147600.chunk.js",
-    "main.js.map": "/character-codex/static/js/main.ea147600.chunk.js.map",
+    "main.js": "/character-codex/static/js/main.cdda791c.chunk.js",
+    "main.js.map": "/character-codex/static/js/main.cdda791c.chunk.js.map",
     "runtime~main.js": "/character-codex/static/js/runtime~main.a53e9a87.js",
     "runtime~main.js.map": "/character-codex/static/js/runtime~main.a53e9a87.js.map",
     "static/js/2.65d49383.chunk.js": "/character-codex/static/js/2.65d49383.chunk.js",
     "static/js/2.65d49383.chunk.js.map": "/character-codex/static/js/2.65d49383.chunk.js.map",
     "index.html": "/character-codex/index.html",
-    "precache-manifest.3b079625469cb171b25be62cd377fce8.js": "/character-codex/precache-manifest.3b079625469cb171b25be62cd377fce8.js",
+    "precache-manifest.9d35f26742b12b075d4049d8e14e1d17.js": "/character-codex/precache-manifest.9d35f26742b12b075d4049d8e14e1d17.js",
     "service-worker.js": "/character-codex/service-worker.js",
     "static/css/main.19393e92.chunk.css.map": "/character-codex/static/css/main.19393e92.chunk.css.map"
   }
