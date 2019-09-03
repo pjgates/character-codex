@@ -8,12 +8,22 @@ import {
     CardContent,
     IconButton,
     Avatar,
-    makeStyles,
-    createStyles,
-    Theme,
+    Grid,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
+    Button,
+    ExpansionPanel,
+    ExpansionPanelSummary,
+    ExpansionPanelDetails,
 } from "@material-ui/core";
 import { MoreVert as MoreVertIcon } from "@material-ui/icons";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
 import theme from "../../theme";
+import WhatshotIcon from "@material-ui/icons/Whatshot";
 
 export interface ThemeProps {
     name?: string;
@@ -57,88 +67,114 @@ export class CharacterTheme extends Component<ThemeProps, ThemeState> {
     };
 
     render() {
+        const dense = true;
+        const showSecondary = false;
         return (
-            <CharacterThemeContainer
-                column={this.props.column}
-                elevation={2}
-                style={{ backgroundColor: "#333" }}
-            >
-                <CustomCardHeader
-                    style={{ padding: theme.spacing(5, 2) }}
-                    avatar={
-                        <Avatar aria-label="theme">
-                            {this.props.type && this.props.type.substring(0, 1)}
-                        </Avatar>
-                    }
-                    action={
-                        <IconButton aria-label="edit" size="small">
-                            <MoreVertIcon />
-                        </IconButton>
-                    }
-                    title={this.props.name}
-                    subheader={this.props.type}
-                />
-                <CardContent style={{ margin: theme.spacing(3, 0) }}>
-                    {/* Powers Section */}
-                    <Typography
-                        variant="body2"
-                        color="textPrimary"
-                        component="p"
-                    >
-                        {this.props.powers &&
-                            Object.keys(this.props.powers).map(
-                                (key: string) => {
-                                    if (
-                                        this.props.weaknesses &&
-                                        this.props.powers[key].length > 0
-                                    ) {
-                                        return (
-                                            <Tag
-                                                key={key}
-                                                letter={key}
-                                                tag={
-                                                    this.props.powers &&
-                                                    this.props.powers[key]
-                                                }
-                                            />
-                                        );
-                                    }
-                                },
-                            )}
-                    </Typography>
-                    <Divider
-                        variant={"middle"}
-                        style={{ margin: theme.spacing(1, 0) }}
+            <Grid item xs={12} sm={6} lg={3}>
+                <Card
+                    elevation={2}
+                    style={{ backgroundColor: "#333", minHeight: "400px" }}
+                >
+                    <Card elevation={3}>
+                    <CustomCardHeader
+                        style={{ padding: theme.spacing(2, 3) }}
+                        avatar={
+                            <Avatar aria-label="theme">
+                                {this.props.type &&
+                                    this.props.type.substring(0, 1)}
+                            </Avatar>
+                        }
+                        action={
+                            <IconButton aria-label="edit" size="small">
+                                <MoreVertIcon />
+                            </IconButton>
+                        }
+                        title={this.props.name}
+                        subheader={this.props.type}
                     />
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
+                    </Card>
+                    <ThemeSummaryPanel>
+                        <ExpansionPanelSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                        >
+                        <Typography style={{fontSize: "0.875rem", color: "rgba(255, 255, 255, 0.7)"}}>Theme Summary</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                        <div>
+                            <Typography variant="subtitle2">Mystery</Typography>
+                            <Typography variant="body2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                            sit amet blandit leo lobortis eget.</Typography><br/>
+                            <Typography variant="subtitle2">Identity</Typography>
+                            <Typography variant="body2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                            sit amet blandit leo lobortis eget.</Typography>
+                        </div>
+                        </ExpansionPanelDetails>
+                    </ThemeSummaryPanel>
+                    <CardContent
+                        style={{ margin: theme.spacing(1, 0), height: "100%" }}
                     >
-                        {this.props.weaknesses &&
-                            Object.keys(this.props.weaknesses).map(
-                                (key: string) => {
-                                    if (
-                                        this.props.weaknesses &&
-                                        this.props.weaknesses[key].length > 0
-                                    ) {
-                                        return (
-                                            <Tag
-                                                key={key}
-                                                letter={key}
-                                                tag={
-                                                    this.props.weaknesses &&
-                                                    this.props.weaknesses[key]
-                                                }
-                                            />
-                                        );
-                                    }
-                                },
-                            )}
-                    </Typography>
-                    <Typography>{this.props.improvements}</Typography>
-                </CardContent>
-            </CharacterThemeContainer>
+                        <div style={{display: "flex", flexDirection: "column", height: "calc(100% - 152px)"}} >
+                        <List dense={dense} style={{flex: "1 1 auto"}}>
+                            {this.props.powers &&
+                                Object.keys(this.props.powers).map(
+                                    (key: string) => {
+                                        if (
+                                            this.props.weaknesses &&
+                                            this.props.powers[key].length > 0
+                                        ) {
+                                            return (
+                                                <Tag
+                                                    key={key}
+                                                    tag={
+                                                        this.props.powers &&
+                                                        this.props.powers[key]
+                                                    }
+                                                    letter={key}
+                                                    onClick={() => {
+                                                        // Do something
+                                                    }}
+                                                />
+                                            );
+                                        }
+                                    },
+                                )}
+                        </List>
+                        <Divider
+                            variant={"middle"}
+                            style={{ margin: theme.spacing(1, 0) }}
+                        />
+                        <List dense={dense}>
+                            {this.props.weaknesses &&
+                                Object.keys(this.props.weaknesses).map(
+                                    (key: string) => {
+                                        if (
+                                            this.props.weaknesses &&
+                                            this.props.weaknesses[key].length >
+                                                0
+                                        ) {
+                                            return (
+                                                <Tag
+                                                    key={key}
+                                                    tag={
+                                                        this.props.weaknesses &&
+                                                        this.props.weaknesses[
+                                                            key
+                                                        ]
+                                                    }
+                                                    letter={key}
+                                                />
+                                            );
+                                        }
+                                    },
+                                )}
+                        </List>
+                        <Typography>{this.props.improvements}</Typography>
+                        </div>
+                    </CardContent>
+                </Card>
+            </Grid>
         );
     }
 }
@@ -155,18 +191,35 @@ const CharacterThemeContainer = styled(({ elevation, ...other }) => (
     grid-template-rows: 50px 2fr 1fr 100px;
 `;
 
+const ThemeSummaryPanel = styled(ExpansionPanel)`
+    &.MuiExpansionPanel-root.Mui-expanded {
+        margin-top: 0px;
+    }
+
+    &.MuiExpansionPanel-root.Mui-expanded::before {
+        opacity: 1
+    }
+`
+
 interface TagProps {
     letter: string;
     tag: string;
     burned?: boolean;
+    onClick?: () => void;
 }
 const Tag: FunctionComponent<TagProps> = (props: TagProps) => {
     return (
-        <TagLayout>
-            <div>{props.letter}</div>
-            <div>{props.tag}</div>
-            <div></div>
-        </TagLayout>
+        <ListItem>
+            <ListItemAvatar style={{ color: "#757575" }}>
+                <span>{props.letter}</span>
+            </ListItemAvatar>
+            <ListItemText primary={props.tag} />
+            {props.onClick && (
+                <Button>
+                    <WhatshotIcon />
+                </Button>
+            )}
+        </ListItem>
     );
 };
 const TagLayout = styled.div`

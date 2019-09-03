@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Sheet, CharacterSheet } from "./Sheet";
+import { Sheet } from "./Sheet";
 import { fetchData, CharacterData } from "./DataController";
 import { Card, CardContent } from "@material-ui/core";
 
@@ -61,14 +61,14 @@ export class SheetController extends Component<Props, State> {
             }
         }
 
-        return <CharacterSheet>{content}</CharacterSheet>;
+        return <>{content}</>;
     }
 }
 
 const ErrorBlock = styled(Card)`
-    grid-row-start: 1;
+    /* grid-row-start: 1;
     grid-column-start: 3;
-    grid-column-end: 5;
+    grid-column-end: 5; */
     align-self: center;
     justify-self: center;
 `;

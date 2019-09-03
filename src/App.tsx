@@ -12,7 +12,7 @@ const App: React.FC = () => {
     return (
         <Router basename={"/"}>
             <MuiThemeProvider theme={theme}>
-                <Paper elevation={0} style={{backgroundColor: "#212121"}}>
+                <Paper elevation={0} style={{backgroundColor: "#212121", minHeight: "100vh"}}>
                     <ButtonAppBar />
                     <Route
                         path={`/character-codex/`}
